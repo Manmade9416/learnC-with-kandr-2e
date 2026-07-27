@@ -8,10 +8,14 @@
 
 #include <stdio.h> // input output header from stdlib
 
+#define LOWER 0    // Symbolic constants, useful to make
+#define UPPER 300  // Characters that are significant to
+#define STEP 20    // to the program more visible ??
+
 float fah_cel_converter(float fahr) { 
     // takes a float arg and returns a float.
     // Converts fahrenheit temperature to a celsius temperature
-    float celsius = (5.0 / 9.0) * (fahr - 32);
+    float celsius = (5.0 / 9.0) * (fahr - 32.0);
     return celsius;
 }
 
@@ -28,7 +32,7 @@ int main(void) {
     // for loop variant of the temp converter is much less
     // verbose and doesn't require that I name a bunch of variables
     // but maybe at the cost readability idk.
-    for (int fahr = 0; fahr <= 300; fahr += 20) {
+    for (int fahr = LOWER; fahr <= UPPER; fahr += STEP) {
         printf("| %d\t   | %.2f\n", fahr, fah_cel_converter(fahr));
     }
     printf("----------------------\n");
