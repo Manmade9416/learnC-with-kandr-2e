@@ -13,6 +13,7 @@
 int main(void) {
     int cha;    // Hold individual chars
     int l = 0;  // how long the word is
+    int nword = 0;
     char *word = malloc(100*sizeof(char)); // Hold word
     memset(word, 0, 100);   // Wipe the entire array?
     bool in_word = false;   // In word or not
@@ -35,20 +36,19 @@ int main(void) {
             if (!first) {
                 printf("\nWord Length Histogram\n");
                 printf("━━━━━━━━━━━━━━━━━━━━━\n");
+                printf("\nX\n");
                 first = true;
             }
-
+            
+            printf("%d ", nword);
             for (int i = 0; i <= l; ++i) 
                 printf(GREEN"█"RESET);
             printf("\n");
 
-            l = 0;  // Reset word len
-            char *temp = malloc(100*sizeof(char));
-            memset(temp, 0, 100);
-            word = temp;    // Reset word to empty array?
+            l = 0;  // Reset word len 
+            memset(word, 0, 100);
             in_word = false;
-
-            free(temp);
+            ++nword;
         }
     }
 
