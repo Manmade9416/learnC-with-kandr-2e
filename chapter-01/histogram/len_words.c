@@ -10,8 +10,6 @@
 #define GREEN   "\x1b[32m"
 #define RESET   "\x1b[0m"
 
-
-
 int main(void) {
     int cha;    // Hold individual chars
     int l = 0;  // how long the word is
