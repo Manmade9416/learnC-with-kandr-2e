@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// ANSI escape codes to show color
+#define GREEN   "\x1b[32m"
+#define RESET   "\x1b[0m"
+
 int main(void) {
     int cha;
     int n = 0;
@@ -20,6 +24,11 @@ int main(void) {
     memset(seen, 0, 75000);
     int skip = 0;
     size_t count = 0; 
+
+    // Heading and start of graph
+    printf("\nWord Length Histogram\n");
+    printf("━━━━━━━━━━━━━━━━━━━━━\n");
+    printf("\n%4sX\n", "");
 
     for (int i = 0; i <= n; ++i) {
 
@@ -48,18 +57,32 @@ int main(void) {
 
         if (count <= 50) {
             for (int k = 0; k <= count; ++k)
-                printf("█");
+                printf(GREEN"█"RESET);
             printf("\n");
         }
         else {
             for (int k = 0; k <= 50; ++k)
-                printf("█");
+                printf(GREEN"█"RESET);
             printf(">50\n");
         }
 
         seen[i] = characters[i];
         count = 0;
     }
+
+    // Print out the bottom piece of the histogram
+    printf("%4s╋", "");
+
+    for (int i = 0; i < 53; ++i)
+        printf("━");
+
+    printf(" Y");
+    printf("\n");
+    printf("%4s0", "");
+
+    for (int i = 10; i <= 55; i += 10)
+        printf("%10d", i);
+
     
     free(characters);
     free(seen);
