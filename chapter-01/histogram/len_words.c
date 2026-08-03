@@ -7,8 +7,8 @@
 #include <stdlib.h>
 
 // ANSI escape codes to show color
-#define GREEN   "\x1b[32m"
-#define RESET   "\x1b[0m"
+#define GREEN "\x1b[32m"
+#define RESET "\x1b[0m"
 
 int main(void) {
     int cha;    // Hold individual chars
@@ -22,7 +22,7 @@ int main(void) {
 
     while ((cha = getchar()) != EOF && l < 1000*sizeof(char)) {
 
-        if (cha != ' ' && cha != '\n' && cha != '\t') {
+        if (cha != ' ' && cha != '\t' && cha != '\n') {
             word[l] = (char)cha;
             ++l;
             if (!in_word) 
@@ -40,7 +40,10 @@ int main(void) {
                 printf("\n%-6sX\n", "");
                 first = true;
             }
-            
+            if (l < 1) {
+                continue;
+            }
+
             if (l > 6) {
                 for (int i = 0; i < 3; ++i)
                     putchar(word[i]);
@@ -64,10 +67,12 @@ int main(void) {
 
             l = 0;
             memset(word, 0, 1000);
-            in_word = false; 
+            in_word = false;
 
-            if (cha == '\n')
-                break;
+            /* if (cha == '\n' || cha == '\t' || cha == ' ') {
+                continue;
+            }*/
+
         }
     }
     
