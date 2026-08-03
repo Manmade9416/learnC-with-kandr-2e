@@ -11,7 +11,9 @@ int gtline(char line[],int max) {
     int c, i;
 
     for (i = 0; i < max && ((c = getchar()) != EOF && c != '\n'); ++i) {
-        line[i] = c;
+        // Make we do not overflow
+        if (i < (max - 1))
+            line[i] = c;
     }
 
     if (c == '\n') {
