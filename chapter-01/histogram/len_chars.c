@@ -26,8 +26,8 @@ int main(void) {
     size_t count = 0; 
 
     // Heading and start of graph
-    printf("\nWord Length Histogram\n");
-    printf("━━━━━━━━━━━━━━━━━━━━━\n");
+    printf("\nChar Appearance Histogram\n");
+    printf("━━━━━━━━━━━━━━━━━━━━━━━━━\n");
     printf("\n%4sX\n", "");
 
     for (int i = 0; i <= n; ++i) {
