@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 int main(void) {
-    size_t count = 0.0;
+    size_t count = 0;
     int cha;
 
     while ((cha = getchar()) != EOF) {
@@ -17,6 +17,6 @@ int main(void) {
         }
     }
 
-    printf("Tab, Space & Newline count = %zu", count);
+    printf("%zu\n", count);
     return 0;
 }

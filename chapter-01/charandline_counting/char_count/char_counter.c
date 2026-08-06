@@ -8,20 +8,20 @@
 #include <stdio.h>
 
 int main(void) {
-    double count = 0.0;
+    size_t count = 0;
     int ch;
     
     while ((ch = getchar()) != EOF) {
         
-        // could remove if block if want to count \n char
-        if (ch == '\n') {
+        // uncomment to not count \n
+        /*if (ch == '\n') {
             continue;
-        }
+        }*/
+
         ++count;
     }
     
-    printf("Final Count = %.0f\n", count);
-
+    printf("%zu\n", count);
     return 0;
 }
     
