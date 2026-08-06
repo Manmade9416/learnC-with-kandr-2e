@@ -20,7 +20,7 @@ int main(void) {
      * my xp because you need EOF to get 0 which is Ctrl+D
      * I think so.*/
 
-    while (c = getchar() != EOF) {
+    while ((c = getchar()) != EOF) {
         putchar(c);
         // printf("%d\n", c);
     }
