@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-#define TABSTOP 4
+#define TABSTOP 8
 
 int main(void) {
 
@@ -32,7 +32,6 @@ int main(void) {
             ++blank_len;
             
             if (row_len % TABSTOP == 0) {
-                printf("%d", row_len);
                 row_len += blank_len;
                 blank_len = 0;
                 putchar('\t');
@@ -42,14 +41,17 @@ int main(void) {
                 while ((cha = getchar()) == ' ') {
                     ++blank_len;
                 }
+
+                /* Put back none space char to be handled by outer loop*/
+                ungetc(cha, stdin);
+                
                 if ((row_len + blank_len) % TABSTOP == 0) {
 
                     int i;
                     for (i = blank_len; i > 0; i -= TABSTOP) {
                         putchar('\t');
                     }
-                    putchar(cha);
-                    row_len += blank_len + 1;
+                    row_len += blank_len;
                     blank_len = 0;
                 }
                 else if ((row_len + blank_len) % TABSTOP != 0) {
@@ -60,19 +62,16 @@ int main(void) {
                         for (i = blank_len - 1; i > 0; i -= TABSTOP) {
                             putchar('\t');
                         }
-                        row_len += blank_len + 2;
+                        row_len += blank_len + 1;
                         putchar(' ');
-                        putchar(cha);
                         blank_len = 0;
                     }
-                    else {
-                        printf("%d", blank_len);
+                    else { 
                         int i;
                         for (i = blank_len; i > 0; --i) {
                             putchar(' ');
                         }
-                        row_len += blank_len + 1;
-                        putchar(cha);
+                        row_len += blank_len;
                         blank_len = 0;
                     }
                 }
