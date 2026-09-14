@@ -31,7 +31,7 @@ int main(void) {
         else if (cha == ' ') {
             ++blank_len;
             
-            if (row_len % TABSTOP == 0) {
+            if ((row_len + blank_len) % TABSTOP == 0) {
                 row_len += blank_len;
                 blank_len = 0;
                 putchar('\t');
@@ -56,23 +56,8 @@ int main(void) {
                 }
                 else if ((row_len + blank_len) % TABSTOP != 0) {
 
-                    if ((row_len - 1) % TABSTOP == 0) {
-
-                        int i;
-                        for (i = blank_len - 1; i > 0; i -= TABSTOP) {
-                            putchar('\t');
-                        }
-                        row_len += blank_len + 1;
-                        putchar(' ');
-                        blank_len = 0;
-                    }
-                    else { 
-                        int i;
-                        for (i = blank_len; i > 0; --i) {
-                            putchar(' ');
-                        }
-                        row_len += blank_len;
-                        blank_len = 0;
+                    if (((row_len + blank_len) % TABSTOP) == 0) 
+                    {
                     }
                 }
             }
@@ -81,4 +66,3 @@ int main(void) {
 
     return 0;
 }
-
