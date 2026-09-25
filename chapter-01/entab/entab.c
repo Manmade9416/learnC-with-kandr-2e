@@ -1,68 +1,68 @@
-/* Replaces any series of blanks in the input with the min
- * amount of spaces and tabs needed to achieve the same
- * spacing as the input
- */
-
+/*k&r excercise 1-21 entab program*/
 #include <stdio.h>
 
-#define TABSTOP 8
+#define TAB_STOP    8 /* width of tab*/
+#define SPACE       ' ' /* char we looking for*/
+#define TAB         '\t' /* 1/2 char to replace by */
+#define NEW_LINE    '\n'
 
-int main(void) {
+int main()
+{
+    int c;
+    size_t w = 0;   /* width/len of line*/
+    size_t nsp = 0; /* n of sequential spaces seen*/
 
-    int cha;
-    int row_len = 0;
-    int blank_len = 0;
+    while ((c = getchar()) != EOF)
+    {
+        if (c == SPACE)
+        {
+            // handle counting of spaces
+            nsp = 1;
+            while ((c = getchar()) == SPACE) ++nsp;
 
-    while ((cha = getchar()) != EOF) {
-
-        if (cha == '\n') { 
-            row_len = 0;
-            putchar(cha);
-        }
-
-        if (cha != ' ' && cha != '\n' && cha != '\t') {   
-            ++row_len;
-            putchar(cha);
-        }
-        else if (cha == '\t') {
-            ++row_len;
-            putchar(cha);
-        }
-        else if (cha == ' ') {
-            ++blank_len;
+            if (nsp >= TAB_STOP)
+            {
+                // atleast 1 full tab needed
+                while (nsp >= TAB_STOP)
+                {
+                    putchar(TAB);
+                    nsp -= TAB_STOP;
+                    /* advance to the next tabstop*/
+                    w = (w / TAB_STOP + 1) * TAB_STOP;
+                }
+            }
             
-            if ((row_len + blank_len) % TABSTOP == 0) {
-                row_len += blank_len;
-                blank_len = 0;
-                putchar('\t');
+            if (nsp > 0 && ((w + nsp) % TAB_STOP) == 0)
+            {
+                putchar(TAB);
+                nsp = 0;
+                ++w;
+            }
+            else
+            {
+                int i;
+                for (i = 0; i < nsp; ++i) putchar(SPACE);
+                w += nsp;
+                nsp = 0;
             }
 
-            else {
-                while ((cha = getchar()) == ' ') {
-                    ++blank_len;
-                }
-
-                /* Put back none space char to be handled by outer loop*/
-                ungetc(cha, stdin);
-                
-                if ((row_len + blank_len) % TABSTOP == 0) {
-
-                    int i;
-                    for (i = blank_len; i > 0; i -= TABSTOP) {
-                        putchar('\t');
-                    }
-                    row_len += blank_len;
-                    blank_len = 0;
-                }
-                else if ((row_len + blank_len) % TABSTOP != 0) {
-
-                    if (((row_len + blank_len) % TABSTOP) == 0) 
-                    {
-                    }
-                }
-            }
+            // handle char that stopped while loop
+            putchar(c);
+            ++w;
+        }
+        else if (c == NEW_LINE)
+        {
+            // reset w to 0
+            putchar(c);
+            w = 0;
+        }
+        else
+        {
+            // increment w
+            putchar(c);
+            ++w;
         }
     }
 
-    return 0;
+
 }
