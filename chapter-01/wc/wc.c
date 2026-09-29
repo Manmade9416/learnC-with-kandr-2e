@@ -1,9 +1,3 @@
-/*
- * Count Characters, Words and Lines from input
- * This is a rough implementation that seems to work
- * but is not identical to the one in the books.
- */
-
 #include <stdio.h>
 #include <stdbool.h>
 
